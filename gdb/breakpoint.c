@@ -5340,6 +5340,8 @@ bpstat_check_breakpoint_conditions (bpstat *bs, thread_info *thread)
   /* Evaluate extension language breakpoints that have a "stop" method
      implemented.  */
   bs->stop = breakpoint_ext_lang_cond_says_stop (b);
+  if (b->disposition == disp_del_at_next_stop)
+    disable_breakpoint(b);
 
   if (is_watchpoint (b))
     {
